@@ -12,10 +12,11 @@ use App\Http\Controllers\paymentview;
 | contains the "web" middleware group. Now create something great!
 |
 */
-//
+
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/clear', 'App\Http\Controllers\GuestController@clear');
 Route::get('/walkin/{booking?}', 'App\Http\Controllers\GuestController@walkinview');
 Route::get('/pay',[paymentview::class,'payment']);
 Route::post('/create', 'App\Http\Controllers\GuestController@walkin')->name('create');

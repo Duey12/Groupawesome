@@ -33,7 +33,7 @@
                   <label class="col-sm-2 col-form-label">Adults</label>
                   <div class="col-sm-4">
                       <select name="adults" class="form-control" >
-                          <option></option>
+                          <option>0</option>
                           <option>1</option>
                           <option>2</option>
                           <option>3</option>
@@ -46,7 +46,7 @@
                   <label class="col-sm-2 col-form-label">Children</label>
                   <div class="col-sm-4">
                       <select name="children" class="form-control" >
-                          <option></option>
+                          <option>0</option>
                           <option>1</option>
                           <option>2</option>
                           <option>3</option>

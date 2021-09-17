@@ -13,33 +13,73 @@ use Illuminate\Support\Facades\DB;
 class GuestController extends Controller
 {
     //
+    function clear(){
+        session()->flush();
+        session()->regenerateToken();
+        return redirect('/walkin');
+    }
+
     function  walkinview(Request $request){
+
         $programmes=programme::all();
         return view('create_walkin',['programmes'=>$programmes,'booking'=>$request->booking]);
     }
 
     function  walkin(Request $request){
-      if($request->booking){
+
+        if($request->booking){
+
+            $cost=cost::where('programme_id',$request->programme)->first();
+            $adult_cost = $cost->adult_cost * $request->adults;
+
+            $children_cost=$cost->children_cost * $request->children;
+            $total_cost=$adult_cost+$children_cost;
+//          dd($total_cost);
+            $excursion=excurison::insert([
+                'date_booked'=>date('Y-m-d'),
+                'exc_date'=>$request->date,
+                'adults_num'=>$request->adults,
+                'child_num'=>$request->children,
+                'child_cost'=>$children_cost,
+                'adult_cost'=>$adult_cost,
+                'total_cost'=>$total_cost,
+                'booking_id'=>$request->booking,
+                'programme_id'=>$request->programme]);
+            return redirect('/pay');
+        }
+
         $cost=cost::where('programme_id',$request->programme)->first();
+
         $adult_cost=$cost->adult_cost*$request->adults;
         $children_cost=$cost->children_cost*$request->children;
         $total_cost=$adult_cost+$children_cost;
-        $excursion=excurison::insert(['date_booked'=>date('Y-m-d'),'exc_date'=>$request->date,
-        'adults_num'=>$request->adults,'child_num'=>$request->children,'child_cost'=>$children_cost,
-        'adult_cost'=>$adult_cost,'total_cost'=>$total_cost,'booking_id'=>$request->booking,'programme_id'=>$request->programme]);
+        $user_id=guest::insertGetId(['guest_name'=>$request->gname]);
+
+//        $tcost=session()->get('tcost');
+//dd($total_cost);
+        $booking_id=booking::insertGetId([
+            'guest_id'=>$user_id,
+            'guest_type'=>'walk in',
+//            'total_cost'=>$tcost,
+            'total_cost'=>'0.00',
+            'booking_date'=>date('Y-m-d H:i:s')
+        ]);
+
+        $excursion=excurison::insert([
+            'date_booked'=>date('Y-m-d'),
+            'exc_date'=>$request->date,
+            'adults_num'=>$request->adults,
+            'child_num'=>$request->children,
+            'child_cost'=>$children_cost,
+            'adult_cost'=>$adult_cost,
+            'total_cost'=>$total_cost,
+            'booking_id'=>$booking_id,
+            'programme_id'=>$request->programme]);
+
+        session()->put('user_id',$user_id);
+        session()->put('user',$request->gname);
+
+
         return redirect('/pay');
-      }
-    $cost=cost::where('programme_id',$request->programme)->first();
-    $adult_cost=$cost->adult_cost*$request->adults;
-    $children_cost=$cost->children_cost*$request->children;
-    $total_cost=$adult_cost+$children_cost;
-    $user_id=guest::insertGetId(['guest_name'=>$request->gname]);
-    $booking_id=booking::insertGetId(['guest_id'=>$user_id,'guest_type'=>'walk in','total_cost'=>$total_cost,'booking_date'=>date('Y-m-d H:i:s')]);
-    $excursion=excurison::insert(['date_booked'=>date('Y-m-d'),'exc_date'=>$request->date,
-    'adults_num'=>$request->adults,'child_num'=>$request->children,'child_cost'=>$children_cost,
-    'adult_cost'=>$adult_cost,'total_cost'=>$total_cost,'booking_id'=>$booking_id,'programme_id'=>$request->programme]);
-    session()->put('user_id',$user_id);
-    session()->put('user',$request->gname);
-    return redirect('/pay');
-  }
+    }
 }

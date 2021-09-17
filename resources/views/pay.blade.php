@@ -113,7 +113,7 @@
               <th>Number of Children</th>
               <th>Children cost</th>
               <th>Total</th>
-
+<?php $a=0;?>
               @foreach($booking as $booking_info)
               <tr>
                 <td>{{$booking_info['programme_name']}}</td>
@@ -122,10 +122,13 @@
                 <td>{{$booking_info['child_num']}}</td>
                 <td>{{$booking_info['child_cost']}}</td>
                 <td>{{$booking_info['total_cost']}}</td>
+                  <?php $a=$a+ $booking_info['total_cost'];?>
               </tr>
               @endforeach
+                <?php session()->put('tcost',$a);?>
+                {{"cost". session()->get('tcost')}}
               <tr>
-                <td><a href="/walkin/{{$booking_info['booking_id']}}"><button type="button"class="btn btn-primary">Add Excurison</button></a></td>
+                <td><a href="/walkin/{{$booking_info['booking_id']}}"><button type="button" class="btn btn-primary">Add Excurison</button></a></td>
               </tr>
             </table>
           </div>
