@@ -82,4 +82,40 @@ class GuestController extends Controller
 
         return redirect('/pay');
     }
+
+    function makepmntview(){
+    return view('makepayment');
+    }
+
+    public function makepmnt(Request $req){
+
+
+        if($req->cash=='cash'){
+            //Do validation requirements here them it will move unto inserting in DB
+
+            DB::table('payments')->insert([
+                'payment_type'=>$req->cash,
+                'date_paid'=> date('Y-m-d H:i:s'),
+                'amt_paid'=> $req->amnt_rec
+                ]);
+        }
+        elseif($req->card=='card'){
+            $amnt_paid=session()->get('tcost');
+//            dd($amnt_paid); works
+            //Do validation requirements here them it will move unto inserting in DB
+            DB::table('payments')->insert([
+            'payment_type'=>$req->card,
+            'date_paid'=> date('Y-m-d H:i:s'),
+            'amt_paid'=>$amnt_paid,
+//            $req->card_num,
+//            $req->card_holder,
+//            $req->exp_date,
+//            $req->cvc,
+            ]);
+
+        }
+
+    return view('paymentconfirmed');
+    //redirect to home page
+    }
 }

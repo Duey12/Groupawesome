@@ -18,6 +18,6 @@ class paymentview extends Controller
       join('programmes','programmes.programme_id','=','excurisons.programme_id')->
       where('bookings.guest_id',$user_id)->get();
       $booking_info=json_decode(json_encode($booking), true);
-      return view('pay',['user'=>$user,'booking'=>$booking_info]);
+      return view('excursionbookingview',['user'=>$user,'booking'=>$booking_info]);
     }
 }
