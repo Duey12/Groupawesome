@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','excursion booking')
+@section('title','Excursion Bookings')
 @section('content')
     <br><br>
     <h1 class="text-center text-muted" >Excursion Bookings</h1>

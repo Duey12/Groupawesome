@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','create')
+@section('title','Payment Portal')
 @section('content')
     <br><br>
     <h1 class="text-center text-muted" >Payment Portal</h1>

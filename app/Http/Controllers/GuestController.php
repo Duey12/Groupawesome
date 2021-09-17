@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class GuestController extends Controller
 {
-    //
+    //used to clear session when testing
     function clear(){
         session()->flush();
         session()->regenerateToken();
@@ -55,13 +55,12 @@ class GuestController extends Controller
         $total_cost=$adult_cost+$children_cost;
         $user_id=guest::insertGetId(['guest_name'=>$request->gname]);
 
-//        $tcost=session()->get('tcost');
-//dd($total_cost);
+         //$tcost=session()->get('tcost');
+         //dd($total_cost);
         $booking_id=booking::insertGetId([
             'guest_id'=>$user_id,
             'guest_type'=>'walk in',
-//            'total_cost'=>$tcost,
-            'total_cost'=>'0.00',
+            'total_cost'=>'0.00', //set total cost here from the session created
             'booking_date'=>date('Y-m-d H:i:s')
         ]);
 
@@ -76,46 +75,54 @@ class GuestController extends Controller
             'booking_id'=>$booking_id,
             'programme_id'=>$request->programme]);
 
-        session()->put('user_id',$user_id);
-        session()->put('user',$request->gname);
-
-
-        return redirect('/pay');
+            session()->put('booking_id',$booking_id);
+            session()->put('user_id',$user_id);
+            session()->put('user',$request->gname);
+            return redirect('/pay');
     }
 
     function makepmntview(){
+        //shows the payment view only
     return view('makepayment');
     }
 
     public function makepmnt(Request $req){
-
-
+        $booking_id=session()->get('booking_id');
         if($req->cash=='cash'){
             //Do validation requirements here them it will move unto inserting in DB
 
             DB::table('payments')->insert([
                 'payment_type'=>$req->cash,
                 'date_paid'=> date('Y-m-d H:i:s'),
-                'amt_paid'=> $req->amnt_rec
+                'amt_paid'=> $req->amnt_rec,
+                'booking_id' => $booking_id
                 ]);
         }
         elseif($req->card=='card'){
             $amnt_paid=session()->get('tcost');
-//            dd($amnt_paid); works
+
             //Do validation requirements here them it will move unto inserting in DB
+
             DB::table('payments')->insert([
             'payment_type'=>$req->card,
             'date_paid'=> date('Y-m-d H:i:s'),
             'amt_paid'=>$amnt_paid,
+            'booking_id' => $booking_id
+//          You can create columns in paymnt table to accommodate these
 //            $req->card_num,
 //            $req->card_holder,
 //            $req->exp_date,
 //            $req->cvc,
             ]);
-
         }
+        $amnt_paid=session()->get('tcost');
+        DB::table('bookings')->where('booking_id','=',$booking_id)->update([
+            'total_cost'=>$amnt_paid
+            ]);
 
+        //session cleared to gain access to new guest
+        session()->flush();
+        session()->regenerateToken();
     return view('paymentconfirmed');
-    //redirect to home page
     }
 }

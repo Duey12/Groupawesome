@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','Create-Walk-In')
+@section('title','Create Walk-In')
 @section('content')
     <br><br>
     <h1 class="text-center text-muted" >Walk-In Guest</h1>
@@ -67,6 +67,7 @@
 
               <br>
               <button class="btn btn-success" type="submit">Submit</button>
+              <button class="btn btn-danger" type="reset">Clear</button>
 
 
         </form>
