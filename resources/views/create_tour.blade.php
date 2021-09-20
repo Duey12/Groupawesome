@@ -5,7 +5,7 @@
 
     <br>
     <div class="container-fluid flex align-item-center justify-center">
-        <form method="post" action="" enctype="multipart/form-data">
+        <form method="post" action="{{route('create')}}" enctype="multipart/form-data">
             @csrf
 
             <div class="form-group row">

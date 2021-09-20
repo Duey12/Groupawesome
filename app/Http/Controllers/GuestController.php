@@ -88,6 +88,7 @@ class GuestController extends Controller
 
     public function makepmnt(Request $req){
         $booking_id=session()->get('booking_id');
+        $cnum= session()->get('cnum');
         if($req->cash=='cash'){
             //Do validation requirements here them it will move unto inserting in DB
 
@@ -95,7 +96,8 @@ class GuestController extends Controller
                 'payment_type'=>$req->cash,
                 'date_paid'=> date('Y-m-d H:i:s'),
                 'amt_paid'=> $req->amnt_rec,
-                'booking_id' => $booking_id
+                'booking_id' => $booking_id,
+                'confirm_num' => $cnum
                 ]);
         }
         elseif($req->card=='card'){
@@ -107,7 +109,8 @@ class GuestController extends Controller
             'payment_type'=>$req->card,
             'date_paid'=> date('Y-m-d H:i:s'),
             'amt_paid'=>$amnt_paid,
-            'booking_id' => $booking_id
+            'booking_id' => $booking_id,
+                'confirm_num' => $cnum
 //          You can create columns in paymnt table to accommodate these
 //            $req->card_num,
 //            $req->card_holder,

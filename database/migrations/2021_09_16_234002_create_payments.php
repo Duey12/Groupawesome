@@ -18,6 +18,7 @@ class CreatePayments extends Migration
             $table->string('payment_type');
             $table->date('date_paid');
             $table->decimal('amt_paid',$precision = 8, $scale = 2);
+            $table->string('confirm_num');
         });
     }
 
