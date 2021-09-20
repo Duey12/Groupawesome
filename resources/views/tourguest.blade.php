@@ -9,90 +9,135 @@
             @csrf
             <div class="wrapper">
               <div class="form-group row">
-                  <label class="col-sm-2 col-form-label">Tour Company</label>
-                  <div class="col-sm-4">
-                    <select class="" name="tour">
-                      <option value=""></option>
-                      @foreach($tour as $tour_comp)
-                      <option value="{{$tour_comp['tour_comp_id']}}">{{$tour_comp['tour_comp_name']}}</option>
-                      @endforeach
-                    </select>
-                  </div>
-              </div>
-              <div class="form-group row">
-                  <label class="col-sm-2 col-form-label">Hotel</label>
-                  <div class="col-sm-4">
-                    <select class="" name="hotel">
-                      <option value=""></option>
-                      @foreach($hotel as $hotels)
-                      <option value="{{$hotels['hotel_id']}}">{{$hotels['hotel_name']}}</option>
-                      @endforeach
-                    </select>
-                  </div>
-              </div>
-              <div class="form-group row">
-                  <label class="col-sm-2 col-form-label">Guest Name</label>
-                  <div class="col-sm-4">
-                      <input type="text" name="gname" value="">
-                  </div>
-              </div>
-              <div class="form-group row">
-                  <label class="col-sm-2 col-form-label">Programme</label>
-                  <div class="col-sm-4">
-                      <select name="programme" class="form-control">
-                        <option value=""></option>
-                        @foreach($programme as $act)
-                        <option value="{{$act['programme_id']}}">{{$act['programme_name']}}</option>
-                        @endforeach
-                      </select>
-                  </div>
-              </div>
-              <div class="form-group row">
-                  <label class="col-sm-2 col-form-label">Adults</label>
-                  <div class="col-sm-4">
-                      <select name="adults" class="form-control" >
-                          <option></option>
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
-
-                      </select>
-                  </div>
-              </div>
-              <div class="form-group row">
-                  <label class="col-sm-2 col-form-label">Children</label>
-                  <div class="col-sm-4">
-                      <select name="children" class="form-control" >
-                          <option></option>
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
+                @if(Session('user'))
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Guest Name</label>
+                    <div class="col-sm-4">
+                        <input type="text" name="gname" value="{{Session('user')}}" disabled>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Programme</label>
+                    <div class="col-sm-4">
+                        <select name="programme" class="form-control">
+                          <option value=""></option>
+                          @foreach($programme as $act)
+                          <option value="{{$act['programme_id']}}">{{$act['programme_name']}}</option>
+                          @endforeach
                         </select>
-                  </div>
-              </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Adults</label>
+                    <div class="col-sm-4">
+                        <select name="adults" class="form-control" >
+                            <option></option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
 
-              <div class="form-group row">
-                  <label class="col-sm-2 col-form-label">Excursion Date</label>
-                  <div class="col-sm-4">
-                      <input type="date" class="form-control" name="date">
-                      <input type="hidden" name="booking" value="{{$booking}}">
-                  </div>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Children</label>
+                    <div class="col-sm-4">
+                        <select name="children" class="form-control" >
+                            <option></option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                          </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Excursion Date</label>
+                    <div class="col-sm-4">
+                        <input type="date" class="form-control" name="date">
+                        <input type="hidden" name="booking" value="{{$booking}}">
+                    </div>
+                </div>
               </div>
+                <button class="btn btn-primary" type="submit">Submit</button>
+                @else
+                <label class="col-sm-2 col-form-label">Tour Company</label>
+                <div class="col-sm-4">
+                  <select class="" name="tour">
+                    <option value=""></option>
+                    @foreach($tour as $tour_comp)
+                    <option value="{{$tour_comp['tour_comp_id']}}">{{$tour_comp['tour_comp_name']}}</option>
+                    @endforeach
+                  </select>
+                </div>
             </div>
-{{--            <div class="form-group row">--}}
-{{--                <label class="col-sm-2 col-form-label">Payment Method</label>--}}
-{{--                <div class="col-sm-4">--}}
-{{--                    <select class="form-control">--}}
-{{--                        <option>Select a payment method</option>--}}
-{{--                        <option value="cash">Cash</option>--}}
-{{--                        <option value="credit">Credit</option>--}}
-{{--                    </select>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-              <br>
-              <button class="btn btn-primary" type="submit">Submit</button>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Hotel</label>
+                <div class="col-sm-4">
+                  <select class="" name="hotel">
+                    <option value=""></option>
+                    @foreach($hotel as $hotels)
+                    <option value="{{$hotels['hotel_id']}}">{{$hotels['hotel_name']}}</option>
+                    @endforeach
+                  </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Guest Name</label>
+                <div class="col-sm-4">
+                    <input type="text" name="gname">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Programme</label>
+                <div class="col-sm-4">
+                    <select name="programme" class="form-control">
+                      <option value=""></option>
+                      @foreach($programme as $act)
+                      <option value="{{$act['programme_id']}}">{{$act['programme_name']}}</option>
+                      @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Adults</label>
+                <div class="col-sm-4">
+                    <select name="adults" class="form-control" >
+                        <option></option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Children</label>
+                <div class="col-sm-4">
+                    <select name="children" class="form-control" >
+                        <option></option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                      </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Excursion Date</label>
+                <div class="col-sm-4">
+                    <input type="date" class="form-control" name="date">
+                    <input type="hidden" name="booking" value="{{$booking}}">
+                </div>
+            </div>
+          </div>
+            <button class="btn btn-primary" type="submit">Submit</button>
+                @endif
+
 
 
             {{--            <div class="form-group row">--}}

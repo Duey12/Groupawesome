@@ -7,7 +7,7 @@
     <div class="container-fluid flex align-item-center justify-center">
         <form method="post" action="" enctype="multipart/form-data">
             @csrf
-
+            @if(Session('user'))
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Hotel</label>
                 <div class="col-sm-4">

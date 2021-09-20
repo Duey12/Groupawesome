@@ -42,6 +42,7 @@ class tourcust extends Controller
       session()->put('user_id',$user_id);
       session()->put('user',$request->gname);
       session()->put('type','walkin');
+      session()->put('booking_id',$booking_id);
       return redirect('/pay');
     }
 }

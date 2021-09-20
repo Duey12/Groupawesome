@@ -41,6 +41,7 @@ class GuestController extends Controller
     'adult_cost'=>$adult_cost,'total_cost'=>$total_cost,'booking_id'=>$booking_id,'programme_id'=>$request->programme]);
     session()->put('user_id',$user_id);
     session()->put('user',$request->gname);
+    session()->put('booking_id',$booking_id);
     return redirect('/pay');
   }
 }

@@ -8,7 +8,7 @@ use App\Models\excurison;
 use App\Models\booking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use session;
 class paymentview extends Controller
 {
     function payment(){
@@ -20,6 +20,7 @@ class paymentview extends Controller
         where('bookings.guest_id',$user_id)->get();
         $booking_info=json_decode(json_encode($booking), true);
         if($booking_info==NULL){
+          Session::flush();
           return redirect('/');
         }
         $userhotel=DB::table('hotels')->join('hotel_reservations','hotel_reservations.hotel_id','=','hotels.hotel_id')->
@@ -37,6 +38,7 @@ class paymentview extends Controller
       where('bookings.guest_id',$user_id)->get();
       $booking_info=json_decode(json_encode($booking), true);
       if($booking_info==NULL){
+        Session::flush();
         return redirect('/');
       }
       return view('pay',['user'=>$user,'booking'=>$booking_info]);
