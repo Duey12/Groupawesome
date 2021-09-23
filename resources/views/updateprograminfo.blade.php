@@ -17,33 +17,9 @@
 
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Dolphin Cove</a>
-        <button class="navbar-toggler" type="button" datastorage-bs-toggle="collapse" datastorage-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/programmes">Programme</a>
-                </li>
-                {{-- <li class="nav-item dropdown"> --}}
-                    <a class="nav-link dropdown-toggle" href="#"  role="button" aria-expanded="false">
-                        | Update Programme
-                    </a>
-                    {{-- <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink"> --}}
-                        {{-- <li><a class="dropdown-item" href="/programme">Programme</a></li>
-                        <li><a class="dropdown-item" href="#">Add Programme</a></li> --}}
-                   </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-    <h1 class="text-center text-muted" >Update Programme</h1>
-
-    <br>
+  <x-adminnavbar/>
+  <h1 class="text-center text-muted" >Update Programme</h1>
+  <br>
     <div class="container-fluid flex align-item-center justify-center">
         <form action="/edit"  method="post" >
             @csrf

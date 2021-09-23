@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -18,124 +17,21 @@
 </head>
 <body>
   <x-adminnavbar/>
-  <h1 class="text-center text-muted" >Add Programme</h1>
+  <h1 class="text-center text-muted" >Add Hotel</h1>
 
     <br>
     <div class="container-fluid flex align-item-center justify-center">
-        <form action="addprogramme"  method="post" >
+        <form action="addhotel"  method="post" >
             @csrf
 
             <input type="hidden" >
              <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Programme Name</label>
+                <label class="col-sm-2 col-form-label">Hotel Name</label>
                 <div class="col-sm-4">
-                  <input type="text" class="form-control" name="pname" placeholder="Name" >
+                  <input type="text" class="form-control" name="hname" placeholder="Hotel Name" >
                 </div>
             </div>
-            <div class="form-group row">
-               <label class="col-sm-2 col-form-label">Adult Cost</label>
-               <div class="col-sm-4">
-                 <input type="number" class="form-control" name="adult_cost" placeholder="Adult cost" >
-               </div>
-           </div>
-           <div class="form-group row">
-              <label class="col-sm-2 col-form-label">Children Cost</label>
-              <div class="col-sm-4">
-                <input type="number" class="form-control" name="children_cost" placeholder="Children cost">
-              </div>
-          </div>
           <br>
               <button class="btn btn-primary" type="submit">Save</button>
             </form>
           </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
-</body>
-</html>

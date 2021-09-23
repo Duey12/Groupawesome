@@ -17,7 +17,7 @@
 
 </head>
 <body>
-  <x-adminnavbar/>
+  <x-cashiernav/>
 
     <h1 class="text-center text-muted" >Programmes</h1>
     <!doctype html>
@@ -130,17 +130,12 @@
                 <td>{{$programinfo['programme_name']}}</td>
                 <td>{{$programinfo['adult_cost']}}</td>
                 <td>{{$programinfo['children_cost']}}</td>
-                <td><td><a href="{{'edit/'.$programinfo['programme_id']}}">
-                <button type="button"class="btn btn-warning">Update Programme</button></a>
-                <a href="{{'delete/'.$programinfo['programme_id']}}"><button type="button"class="btn btn-danger">Delete Programme</button></a>
-                    </td>
                 </tr>
               @endforeach
               <tr>
-                <td><a href="/add"><button type="button"class="btn btn-primary">Add Program</button><a/></td>              </tr>
-
-
-                </table>
+              </table>
           </div>
         </div>
-    </div
+    </div>
+    </body>
+</html>

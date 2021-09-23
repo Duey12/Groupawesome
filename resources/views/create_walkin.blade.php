@@ -1,7 +1,8 @@
 @extends('layouts.master')
 @section('title','Create-Walk-In')
 @section('content')
-    <h1 class="text-center text-muted" >Walk-In Guest</h1>
+<x-cashiernav/>
+  <h1 class="text-center text-muted" >Walk-In Guest</h1>
 
     <br>
     <div class="container-fluid flex align-item-center justify-center">
